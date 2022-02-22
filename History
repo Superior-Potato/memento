@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
 public class History {
-    private ArrayList<DocumentState> history;
+    private ArrayList<Document> history;
 
-    public History(ArrayList<DocumentState> history) {
+    public History(ArrayList<Document> history) {
         this.history = history;
     }
 
-    public void push(DocumentState ds){
+    public void push(Document ds){
         history.add(ds);
     }
 
-    public DocumentState pop(){
+    public Document pop(){
         if(this.history != null && !this.history.isEmpty()){
             return this.history.remove(this.history.size()-1);
         }
