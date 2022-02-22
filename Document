@@ -10,7 +10,7 @@ public class Document {
         this.content = content;
         this.fontName = fontName;
         this.fontSize = fontSize;
-        this.history = new History(new ArrayList<DocumentState>());
+        this.history = new History(new ArrayList<Document>());
     }
 
     public String getContent() {
@@ -42,12 +42,12 @@ public class Document {
 
     private void saveState(){
         if(this.history != null){
-            this.history.push(new DocumentState(this));
+            this.history.push(new Document(this.content, this.fontName, this.fontSize));
         }
     }
 
     public void restore(){
-        DocumentState lastState = this.history.pop();
+        Document lastState = this.history.pop();
         if(lastState != null){
             this.content = lastState.content;
             this.fontName = lastState.fontName;
