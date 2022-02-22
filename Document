@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+
+public class Document {
+    private String content;
+    private String fontName;
+    private int fontSize;
+    private History history;
+
+    public Document(String content, String fontName, int fontSize) {
+        this.content = content;
+        this.fontName = fontName;
+        this.fontSize = fontSize;
+        this.history = new History(new ArrayList<DocumentState>());
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.saveState();
+        this.content = content;
+    }
+
+    public String getFontName() {
+        return fontName;
+    }
+
+    public void setFontName(String fontName) {
+        this.saveState();
+        this.fontName = fontName;
+    }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.saveState();
+        this.fontSize = fontSize;
+    }
+
+    private void saveState(){
+        if(this.history != null){
+            this.history.push(new DocumentState(this));
+        }
+    }
+
+    public void restore(){
+        DocumentState lastState = this.history.pop();
+        if(lastState != null){
+            this.content = lastState.content;
+            this.fontName = lastState.fontName;
+            this.fontSize = lastState.fontSize;
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "content='" + content + '\'' +
+                ", fontName='" + fontName + '\'' +
+                ", fontSize=" + fontSize +
+                "}\n";
+    }
+}
