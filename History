@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+
+public class History {
+    private ArrayList<DocumentState> history;
+
+    public History(ArrayList<DocumentState> history) {
+        this.history = history;
+    }
+
+    public void push(DocumentState ds){
+        history.add(ds);
+    }
+
+    public DocumentState pop(){
+        if(this.history != null && !this.history.isEmpty()){
+            return this.history.remove(this.history.size()-1);
+        }
+        return null;
+    }
+}
